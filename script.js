@@ -49,7 +49,7 @@ const pivot = new THREE.Object3D(); // Das Pivot-Objekt
 const loader = new THREE.GLTFLoader();
 
 loader.load(
-    'assets/knife.glb', // Pfad zu deinem GLB-Modell
+    'assets/Knife.glb', // Pfad zu deinem GLB-Modell
     function (gltf) {
         // Das 3D-Modell zur Szene hinzufügen
         model = gltf.scene;
