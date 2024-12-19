@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Modell anzeigen</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        
+        body {
+        margin: 0; /* Entfernt die Standard-Ränder */
+        background-color: green; /* Hintergrund schwarz */
+        color: white; /* Textfarbe auf weiß setzen, damit man den Text sieht */
+        }
+        canvas {
+            display: block;
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Der Canvas wird von Three.js automatisch erstellt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
