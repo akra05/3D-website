@@ -2,42 +2,23 @@ let isMouseDown = false;
 let lastMouseX = 0;
 let lastMouseY = 0;
 
-document.addEventListener("mousedown", (event) => {
-    isMouseDown = true;
-    lastMouseX = event.clientX;
-    lastMouseY = event.clientY;
-});
+const container = document.getElementById('canvas-container');
 
-document.addEventListener("mouseup", () => {
-    isMouseDown = false;
-});
-
-document.addEventListener("mousemove", (event) => {
-    if (isMouseDown && model) {
-        const deltaX = event.clientX - lastMouseX; // Differenz der Mausbewegung in X
-        const deltaY = event.clientY - lastMouseY; // Differenz der Mausbewegung in Y
-
-        // Geschwindigkeit der Rotation anpassen
-        const rotationSpeed = 0.02;
-
-        // Rotation basierend auf Mausbewegung berechnen
-        const newRotationX = pivot.rotation.x + deltaY * rotationSpeed;
-        pivot.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, newRotationX));
-        pivot.rotation.y += deltaX * rotationSpeed; // Drehung um Y-Achse (horizontal)
-        
-
-        lastMouseX = event.clientX;
-        lastMouseY = event.clientY;
-    }
+container.addEventListener("wheel", (event) => {
+    // Verhindere das Standard-Scrollen, falls gewünscht
+   rotation_buffer = 0.0005;
+    // Passe den Rotationswert an – event.deltaY gibt die Scroll-Richtung und -Geschwindigkeit an
+    console.log("Mausrad-Event ausgelöst:", event.deltaY);
+    pivot.rotation.x += event.deltaY*rotation_buffer;
 });
 
 // Szene, Kamera und Renderer initialisieren
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(60, container.offsetWidth / container.offsetHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x440000);
-document.body.appendChild(renderer.domElement);
+renderer.setSize(container.offsetWidth, container.offsetHeight);
+renderer.setClearColor(0x151515);
+container.appendChild(renderer.domElement);
 
 // Licht hinzufügen
 const light = new THREE.HemisphereLight(0xFFFFFF, 0x444444, 1);
@@ -48,12 +29,10 @@ let model = null;
 const pivot = new THREE.Object3D(); // Das Pivot-Objekt
 const loader = new THREE.GLTFLoader();
 
-loader.load(
-    'assets/Knife.glb', // Pfad zu deinem GLB-Modell
-    function (gltf) {
+loader.load('assets/Knife.glb', function (gltf) {
         // Das 3D-Modell zur Szene hinzufügen
         model = gltf.scene;
-        model.scale.set(30, 30, 30);
+        model.scale.set(80, 80, 80);
 
         // Berechne die Bounding Box des Modells
         const bbox = new THREE.Box3().setFromObject(model);

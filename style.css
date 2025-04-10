@@ -1,0 +1,31 @@
+/* Allgemeine Einstellungen */
+body {
+    margin: 0; 
+    background-color: rgb(40, 40, 40); /* Hintergrundfarbe */
+    color: white; /* Textfarbe */
+    font-family: Arial, sans-serif; /* Schriftart */
+}
+
+/* Text über der Seite */
+p {
+    margin: 20px;
+    text-align: center;
+}
+
+/* Canvas-Container */
+#canvas-container {
+    position: fixed;    /* Fixiert den Container relativ zum Viewport */
+    top: 0;             /* Kein Abstand oben */
+    left: 0;            /* Kein Abstand links */
+    width: 100vw;       /* Volle Breite des Viewports */
+    height: 100vh;      /* Volle Höhe des Viewports */
+    overflow: hidden;   /* Kein Überlauf */
+    z-index: -10;        /* Hinter den anderen Inhalten platzieren */
+}
+
+/* Canvas im Container */
+canvas {
+    display: block;
+    width: 100%; /* Füllt den Container aus */
+    height: 100%; /* Füllt den Container aus */
+}
